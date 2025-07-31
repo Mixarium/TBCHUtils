@@ -1,0 +1,18 @@
+# To learn about plugin YAML attributes, visit: http://wiki.bukkit.org/Plugin_YAML or https://www.spigotmc.org/wiki/plugin-yml/
+# To learn about semantic versioning, visit: https://semver.org
+main: org.tbch.tbchutils.TBCHUtils
+version: 1.0.0
+name: TBCHUtils
+author: The Beta Clubhouse Organization
+website: https://github.com/Mixarium/TBCHUtils
+description: Utilites that the Beta Clubhouse server relies on.
+depend: [Essentials]
+commands:
+  playtime:
+    description: Shows user's own current session time and overall time played on the server, as well as a top playtime list.
+    usage: /playtime (top (integer))
+  seen:
+    description: Shows when a player logged out last time.
+  tps:
+    description: Shows server TPS (ticks per second), on an average of 5 seconds.
+    usage: /tps
