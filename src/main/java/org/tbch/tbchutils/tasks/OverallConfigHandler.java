@@ -20,8 +20,7 @@ public class OverallConfigHandler implements Runnable {
         List<String> usernames = new ArrayList<>();
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             usernames.add(player.getName());
-
-            Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new AsyncPlaytimeHandler(usernames));
         }
+        Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new AsyncPlaytimeHandler(usernames));
     }
 }
