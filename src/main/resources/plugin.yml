@@ -8,6 +8,15 @@ website: https://github.com/Mixarium/TBCHUtils
 description: Utilites that the Beta Clubhouse server relies on.
 depend: [Essentials]
 commands:
+  balancetop:
+    description: Shows top balance list, can be up to 100 players.
+    aliases: [baltop,ebaltop,ebalancetop]
+  baltop:
+    description: Shows top balance list, can be up to 100 players.
+  ebalancetop:
+    description: Shows top balance list, can be up to 100 players.
+  ebaltop:
+    description: Shows top balance list, can be up to 100 players.
   playtime:
     description: Shows user's own current session time and overall time played on the server, as well as a top playtime list.
     usage: /playtime (top (integer))
