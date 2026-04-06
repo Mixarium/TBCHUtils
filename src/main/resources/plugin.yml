@@ -17,6 +17,9 @@ commands:
     description: Shows top balance list, can be up to 100 players.
   ebaltop:
     description: Shows top balance list, can be up to 100 players.
+  noclip:
+    description: Teleports user to random coordinate in range provided by operator after a specified amount of time.
+    usage: /noclip (help) <player> <world> <delay> <min-x> <min-y> <min-z> <max-x> <max-y> <max-z>
   playtime:
     description: Shows user's own current session time and overall time played on the server, as well as a top playtime list.
     usage: /playtime (top (integer))
@@ -25,3 +28,6 @@ commands:
   tps:
     description: Shows server TPS (ticks per second), on an average of 5 seconds.
     usage: /tps
+  wlsearch:
+    description: Allows simpler search using initial characters provided by operator.
+    usage: /wlsearch {string}

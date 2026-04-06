@@ -2,10 +2,7 @@ package org.tbch.tbchutils;
 
 import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.tbch.tbchutils.commands.Balancetop;
-import org.tbch.tbchutils.commands.Playtime;
-import org.tbch.tbchutils.commands.Seen;
-import org.tbch.tbchutils.commands.TPS;
+import org.tbch.tbchutils.commands.*;
 import org.tbch.tbchutils.listeners.ConfigEventHandler;
 import org.tbch.tbchutils.tasks.OverallConfigHandler;
 import org.tbch.tbchutils.tasks.TPSMeasurer;
@@ -34,16 +31,19 @@ public class TBCHUtils extends JavaPlugin {
         getCommand("ebalancetop").setExecutor(new Balancetop(this));
         getCommand("ebaltop").setExecutor(new Balancetop(this));
 
+        getCommand("noclip").setExecutor(new Noclip(this));
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("seen").setExecutor(new Seen(this));
         getCommand("tps").setExecutor(new TPS());
+        getCommand("wlsearch").setExecutor(new WLSearch(this));
+
         LogUtil.logConsoleInfo(String.format("[%s] Enabled.", getDescription().getName()));
 
     }
 
     @Override
     public void onDisable() {
-        LogUtil.logConsoleInfo(String.format("[%s] v%s Disabled.", getDescription().getName(), getDescription().getVersion()));
+        LogUtil.logConsoleInfo(String.format("[%s] Disabled.", getDescription().getName()));
     }
 
     public static JavaPlugin getInstance() {
