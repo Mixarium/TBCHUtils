@@ -1,8 +1,10 @@
 package org.tbch.tbchutils.memory;
 
+import de.fgtech.pomo4ka.AuthMe.AuthMe;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.tbch.tbchutils.util.TeleportUtil;
 
@@ -46,7 +48,10 @@ public class NoclipPendingMemory {
             pendingTasks.remove(taskID[0]);
 
             Player player = Bukkit.getServer().getPlayer(username);
-            if (player != null && player.isOnline()) {
+            Plugin authMePlugin = Bukkit.getServer().getPluginManager().getPlugin("AuthMe");
+            AuthMe authMeJP = (AuthMe) authMePlugin;
+
+            if (player != null && player.isOnline() && authMeJP.getPlayercache().isPlayerAuthenticated(player)) {
                 player.teleport(new Location(Bukkit.getServer().getWorld(worldName), x, y, z));
                 player.sendMessage(TeleportUtil.getRandomMessage());
             }
