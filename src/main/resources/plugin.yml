@@ -17,6 +17,9 @@ commands:
     description: Shows top balance list, can be up to 100 players.
   ebaltop:
     description: Shows top balance list, can be up to 100 players.
+  herobrine:
+    description: Makes player commit suicide in the server.
+    aliases: [suicide]
   noclip:
     description: Teleports user to random coordinate in range provided by operator after a specified amount of time.
     usage: /noclip (help) <player> <world> <delay> <min-x> <min-y> <min-z> <max-x> <max-y> <max-z>

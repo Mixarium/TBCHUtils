@@ -31,6 +31,7 @@ public class TBCHUtils extends JavaPlugin {
         getCommand("ebalancetop").setExecutor(new Balancetop(this));
         getCommand("ebaltop").setExecutor(new Balancetop(this));
 
+        getCommand("herobrine").setExecutor(new Herobrine());
         getCommand("noclip").setExecutor(new Noclip(this));
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("seen").setExecutor(new Seen(this));
