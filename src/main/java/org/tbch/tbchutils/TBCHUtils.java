@@ -4,6 +4,8 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.tbch.tbchutils.commands.*;
 import org.tbch.tbchutils.listeners.ConfigEventHandler;
+import org.tbch.tbchutils.listeners.UnopenedGiftsNotif;
+import org.tbch.tbchutils.memory.GiftsHandler;
 import org.tbch.tbchutils.tasks.OverallConfigHandler;
 import org.tbch.tbchutils.tasks.TPSMeasurer;
 import org.tbch.tbchutils.util.log.LogUtil;
@@ -25,18 +27,25 @@ public class TBCHUtils extends JavaPlugin {
         getServer().getPluginManager().registerEvent(Event.Type.PLAYER_QUIT, configEventHandler, Event.Priority.Highest, this);
         getServer().getPluginManager().registerEvent(Event.Type.PLAYER_KICK, configEventHandler, Event.Priority.High, this);
 
+        UnopenedGiftsNotif unopenedGiftsNotif = new UnopenedGiftsNotif(this);
+        getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, unopenedGiftsNotif, Event.Priority.Lowest, this);
+
         // override all of essentials's initial aliases of the balancetop command
         getCommand("balancetop").setExecutor(new Balancetop(this));
         getCommand("baltop").setExecutor(new Balancetop(this));
         getCommand("ebalancetop").setExecutor(new Balancetop(this));
         getCommand("ebaltop").setExecutor(new Balancetop(this));
 
+        getCommand("gift").setExecutor(new Gift(this));
         getCommand("herobrine").setExecutor(new Herobrine());
         getCommand("noclip").setExecutor(new Noclip(this));
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("seen").setExecutor(new Seen(this));
         getCommand("tps").setExecutor(new TPS());
         getCommand("wlsearch").setExecutor(new WLSearch(this));
+
+        GiftsHandler.setGiftsConfig(this, "gifts.yml");
+        GiftsHandler.setExpiredGiftsForRetrieval();
 
         LogUtil.logConsoleInfo(String.format("[%s] Enabled.", getDescription().getName()));
 

@@ -27,6 +27,15 @@ public class EssentialsConfigReader {
         startingBalance = generalConfig.getDouble("starting-balance", 0);
     }
 
+    public static boolean hasUserPlayedBefore(String username) {
+        File userdataFolder = new File("plugins/Essentials/userdata");
+        if (!userdataFolder.exists() || !userdataFolder.isDirectory()) {
+            return false;
+        }
+        File userFile = new File(userdataFolder, username.toLowerCase() + ".yml");
+        return userFile.exists();
+    }
+
     public static Map<String, Double> getAllBalances() {
         Map<String, Double> balances = new HashMap<>();
         File userdataFolder = new File("plugins/Essentials/userdata");

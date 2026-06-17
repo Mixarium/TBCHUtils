@@ -17,6 +17,9 @@ commands:
     description: Shows top balance list, can be up to 100 players.
   ebaltop:
     description: Shows top balance list, can be up to 100 players.
+  gift:
+    description: Gives users gifts even while they're offline.
+    usage: /gift stats / open / retrieve / give {username}
   herobrine:
     description: Makes player commit suicide in the server.
     aliases: [suicide]
@@ -29,7 +32,7 @@ commands:
   seen:
     description: Shows when a player logged out last time.
   tps:
-    description: Shows server TPS (ticks per second), on an average of 5 seconds.
+    description: Shows server TPS (ticks per second) (code belongs to retromcorg/Project-Poseidon on GitHub).
     usage: /tps
   wlsearch:
     description: Allows simpler search using initial characters provided by operator.

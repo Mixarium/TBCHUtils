@@ -1,42 +1,34 @@
 package org.tbch.tbchutils.tasks;
 
-//code was taken from this article https://bukkit.org/threads/get-server-tps.143410/
-public class TPSMeasurer implements Runnable{
-    public static int TICK_COUNT= 0;
-    public static long[] TICKS= new long[600];
-    public static long LAST_TICK= 0L;
+import java.util.LinkedList;
 
-    public static double getTPS()
-    {
-        return getTPS(100);
+/* admittedly, code was taken from Project-Poseidon's /tps command
+* https://github.com/retromcorg/Project-Poseidon/commit/9435b4df9d3949a316d6dbd509e0a6324f3e772d */
+
+public class TPSMeasurer implements Runnable {
+    private static final LinkedList<Double> tpsRecords = new LinkedList<>();
+    private long lastTick = System.currentTimeMillis();
+    private int tickCount = 0;
+
+    public static LinkedList<Double> getTpsRecords() {
+        return tpsRecords;
     }
 
-    public static double getTPS(int ticks)
-    {
-        if (TICK_COUNT< ticks) {
-            return 20.0D;
+    @Override
+    public void run() {
+        long currentTime = System.currentTimeMillis();
+        tickCount++;
+
+        //Check if a second has passed
+        if (currentTime - lastTick >= 1000) {
+            double tps = tickCount / ((currentTime - lastTick) / 1000.0);
+            tpsRecords.addFirst(tps);
+            if(tpsRecords.size() > 900) { //Don't keep more than 15 minutes of data
+                tpsRecords.removeLast();
+            }
+
+            tickCount = 0;
+            lastTick = currentTime;
         }
-        int target = (TICK_COUNT- 1 - ticks) % TICKS.length;
-        long elapsed = System.currentTimeMillis() - TICKS[target];
-
-        return ticks / (elapsed / 1000.0D);
-    }
-
-    /*
-    public static long getElapsed(int tickID)
-    {
-        if (TICK_COUNT- tickID >= TICKS.length)
-        {
-        }
-
-        long time = TICKS[(tickID % TICKS.length)];
-        return System.currentTimeMillis() - time;
-    }*/
-
-    public void run()
-    {
-        TICKS[(TICK_COUNT% TICKS.length)] = System.currentTimeMillis();
-
-        TICK_COUNT+= 1;
     }
 }
