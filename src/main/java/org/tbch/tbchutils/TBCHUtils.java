@@ -4,7 +4,9 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.tbch.tbchutils.commands.*;
 import org.tbch.tbchutils.listeners.ConfigEventHandler;
+import org.tbch.tbchutils.listeners.NotchAppleDrop;
 import org.tbch.tbchutils.listeners.UnopenedGiftsNotif;
+import org.tbch.tbchutils.memory.AutoMessage;
 import org.tbch.tbchutils.memory.GiftsHandler;
 import org.tbch.tbchutils.tasks.OverallConfigHandler;
 import org.tbch.tbchutils.tasks.TPSMeasurer;
@@ -30,6 +32,8 @@ public class TBCHUtils extends JavaPlugin {
         UnopenedGiftsNotif unopenedGiftsNotif = new UnopenedGiftsNotif(this);
         getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, unopenedGiftsNotif, Event.Priority.Lowest, this);
 
+        getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DEATH, new NotchAppleDrop(), Event.Priority.Lowest, this);
+
         // override all of essentials's initial aliases of the balancetop command
         getCommand("balancetop").setExecutor(new Balancetop(this));
         getCommand("baltop").setExecutor(new Balancetop(this));
@@ -46,6 +50,8 @@ public class TBCHUtils extends JavaPlugin {
 
         GiftsHandler.setGiftsConfig(this, "gifts.yml");
         GiftsHandler.setExpiredGiftsForRetrieval();
+
+        AutoMessage.initialize(this, "autoMessages.yml");
 
         LogUtil.logConsoleInfo(String.format("[%s] Enabled.", getDescription().getName()));
 
